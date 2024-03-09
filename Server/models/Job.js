@@ -1,37 +1,39 @@
-const mongoose=required('mongoose');
-const JobSchema=new mongoose.Schema
-(
-    {
-        jobtitle:
-        {
-            type:String,
-            required:true,
-        },
-        jobType:
-        {
-            type:String,
-            enum:["PART-TIME","FULL-TIME"],
-            required:true,
-        },
-        salary:
-        {
-            type:Number,
-            required:true,
-        },
-        location:
-        {
-            type:String,
-            required:true,
-        },
-        company:
-        {
-            type:String,
-            requred:true,
-        },
-        companyLogo:
-        {
+const mongoose = require("mongoose");
 
-        },
-
-    }
-)
+const jobSchema = new mongoose.Schema({
+    jobTitle:{
+        type:String,
+        trim:true
+    },
+    jobDescriptiom:{
+        type:String,
+        trim:true,
+    },
+    employer:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
+    jobType:{
+        type:String,
+        enum:["Part-Time","Full-Time"],
+    },
+    category:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Category"
+    },
+    tag:{
+        type:String,
+    },
+    location:{
+        type:String,
+    },
+    jobPost:{
+        type:String
+    },
+    jobApplication:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User"
+        }
+    ]
+})
