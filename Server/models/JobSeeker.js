@@ -22,19 +22,24 @@ const jobSeekerSchema = new mongoose.Schema({
     },
     contactNumber:{
         type:Number,
-        trim:true
+        trim:true,
+        required:true,
     },
     currentSalary:{
         type:String,
+        required:true,
     },
     location:{
-        type:String
+        type:String,
+        required:true
     },
     degree:{
-        type:String
+        type:String,
+        required:true,
     },
     experiance:{
         type:String,
+        required:true,
     }
 
 })

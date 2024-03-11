@@ -5,7 +5,7 @@ const jobSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
-    jobDescriptiom:{
+    jobDescription:{
         type:String,
         trim:true,
     },
@@ -30,7 +30,7 @@ const jobSchema = new mongoose.Schema({
     jobPost:{
         type:String
     },
-    jobApplication:[
+    jobApplications:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:"User"

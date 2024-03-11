@@ -28,11 +28,11 @@ const userSchema = new mongoose.Schema({
     token:{
         type:String
     },
-    jobSeekerDetails:{
+    jobSeeker:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"JobSeeker"
     },
-    employerDetails:{
+    employer:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Employer"
     },
