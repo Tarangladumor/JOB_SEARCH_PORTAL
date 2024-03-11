@@ -15,14 +15,12 @@ const employerSchema=new mongoose.Schema(
         },
         location:{
             type:String,
+            required:true
         },
         contactNumber:{
             type:Number,
             trim:true
         },
-        location:{
-            type:String
-        }
     }
 )
 module.exports = mongoose.model("Employer", employerSchema)
