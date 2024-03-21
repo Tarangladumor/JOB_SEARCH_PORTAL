@@ -77,20 +77,32 @@ exports.signUp = async (req, res) => {
             location
         } = req.body;
 
+        console.log(" BACKEND : >>>>>.....",
+            "firstname : ", firstName,
+            "lastname : ",lastName,
+            "email : ",email,
+            "password : ",password,
+            "confirm password: ",confirmPassword,
+            "Account type : ",AccountType,
+            "otp : ",otp,
+            "location : ",location
+        );
+
         if (!firstName ||
             !lastName ||
             !email ||
             !password ||
             !confirmPassword ||
             !location ||
-            !otp) {
-            return res.staus(401).json({
+            !otp 
+            ) {
+            return res.status(401).json({
                 success: false,
                 message: "All feilds are required"
             })
         }
 
-        if (password != confirmPassword) {
+        if (password !== confirmPassword) {
             return res.status(400).json({
                 success: false,
                 message: "password and confirmPaassword are not same"
@@ -102,13 +114,12 @@ exports.signUp = async (req, res) => {
         if (existUser) {
             return res.status(400).json({
                 success: false,
-                message: "USer already exists"
+                message: "User already exists"
             });
         }
 
-        const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+        const response = await OTP.find({email}).sort({createdAt:-1}).limit(1);
         console.log(response);
-
         // validate otp
 
         if (response.length === 0) {

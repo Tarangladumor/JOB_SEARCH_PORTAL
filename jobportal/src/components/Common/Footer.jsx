@@ -55,7 +55,7 @@ const Footer = () => {
                 <div className='border-2 border-[#004E89] rounded-3xl w-[29%] bg-lineargradient flex justify-center items-center'>
                     <form className='flex flex-col gap-5 w-11/12'>
                         <label className=' font-semibold font-jura text-2xl' htmlFor='feedback'>Feedback</label>
-                        <textarea name='feedback' rows={5} cols={10} className='w-[90%] mx-auto'></textarea>
+                        <textarea name='feedback' rows={5} cols={10} className='w-[90%] mx-auto placeholder:pl-3 placeholder:pt-2 placeholder:font-jura' placeholder='Enter your feedBack'></textarea>
 
                         <div className='flex justify-end'>
                             <button className='bg-[#BFD3E2] rounded-full border-2 border-[#7FAFD3] text-base px-5 py-1 font-jura'>Submit</button>

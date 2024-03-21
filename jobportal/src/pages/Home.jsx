@@ -11,7 +11,7 @@ import Footer from '../components/Common/Footer';
 const Home = () => {
     return (
         <div>
-            <div className='bg-[#BFD3E2] flex flex-col gap-1'>
+            <div className='bg-[#fff] flex flex-col gap-1'>
                 <div className='flex flex-col items-center mt-16'>
                     <h1 className=' font-jura font-bold text-4xl'>Find Your First <span className=' font-jura text-[#004E89]'>Job</span></h1>
                     <p className=' font-jura text-2xl font-semibold'>You miss <span className='text-[#004E89]'>100% </span>of the shots you don’t take.</p>

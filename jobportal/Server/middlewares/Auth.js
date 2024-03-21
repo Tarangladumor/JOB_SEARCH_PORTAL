@@ -1,8 +1,9 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { useAsyncError } = require('react-router-dom');
 
 exports.auth = async(req,res,next) => {
     try {
-        const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer ","");
+        const token = await req.cookies.token || req.body.token ||  req.header("authorization")?.replace("Bearer ","");
 
         if(!token) {
             return res.status(401).json({
