@@ -30,6 +30,9 @@ const jobSchema = new mongoose.Schema({
     jobPost:{
         type:String
     },
+    Salary:{
+        type:String
+    },
     jobApplications:[
         {
             type:mongoose.Schema.Types.ObjectId,
