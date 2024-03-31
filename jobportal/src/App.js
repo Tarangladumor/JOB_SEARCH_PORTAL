@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import VerifyEmail from './pages/VerifyEmail';
 import Jobs from './pages/Jobs';
+import JOB from './pages/JOB';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <Route path='signup' element={<Signup/>}/>
 
         <Route path='/jobs' element={<Jobs/>}/>
+
+        <Route path='/jobs/:jobId' element={<JOB/>}/>
 
       </Routes>
     </div>

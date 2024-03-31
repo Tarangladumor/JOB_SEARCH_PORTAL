@@ -3,6 +3,7 @@ import { IoIosSearch } from "react-icons/io";
 import { getAllJobs } from '../services/operations/jobsAPI';
 import { IoLocationSharp } from "react-icons/io5";
 import { MdOutlineDescription } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 const Jobs = () => {
 
@@ -13,6 +14,7 @@ const Jobs = () => {
         const fetchData = async () => {
             try {
                 const data = await getAllJobs();
+                console.log(data);
                 setjobs(data);
             } catch (error) {
                 console.log("Error in fetching jobs", error);
@@ -40,7 +42,7 @@ const Jobs = () => {
                 <div className='flex flex-col gap-10 mt-16'>
                     {
                         jobs.map((job) => (
-                            <div key={job.id}>
+                            <div key={job._id}>
 
                                 <div className='w-full border-2 border-[#7FAFD3] rounded-3xl px-8 py-8 flex flex-col gap-1 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.2)]'>
                                     <h1 className='font-jura font-bold text-4xl'>{job.jobTitle}</h1>
@@ -56,9 +58,11 @@ const Jobs = () => {
                                     <p className='font-jura font-normal text-xl'><spna className='font-jura font-bold text-xl'>Type : </spna>{job?.jobType}</p>
 
                                     <div className='flex justify-end '>
-                                        <button className='border-2 border-[#7FAFD3] w-fit text-xl font-jura px-2 py-[5px] rounded-xl bg-[#004E89] text-white'>
-                                            Apply now
-                                        </button>
+                                        <Link to={`/jobs/${job._id}`}>
+                                            <button className='border-2 border-[#7FAFD3] w-fit text-xl font-jura px-2 py-[5px] rounded-xl bg-[#004E89] text-white'>
+                                                Apply now
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

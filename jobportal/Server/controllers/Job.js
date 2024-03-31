@@ -111,9 +111,21 @@ exports.getAllJobs = async(req,res) => {
 exports.getOneJobDetails = async(req,res) => {
     try{
 
-        const {jobId} = req.body;
+        // const jobId = req.query.jobId;
+        // console.log(req.query)
 
-        const jobDetail = await Job.findById(jobId);
+        const { jobId } = req.params;
+        console.log("PARAMS: ",req.params);
+        // console.log("JOB IDDDDDD >>>>>>>",jobId);
+
+        // console.log("JOB ID >>>>>>>>>>>>>>>>>>>>>>>",jobId);
+
+        const jobDetail = await Job.findById(jobId).populate({
+            path:"employer",
+            populate:{
+                path:"employer"
+            }
+        });
 
         if(!jobDetail) {
             return res.status(400).json({
@@ -125,11 +137,11 @@ exports.getOneJobDetails = async(req,res) => {
         return res.status(200).json({
             success:true,
             message:"Job fetched successfully",
-            Data:jobDetail
+            data:jobDetail
         })
     } catch (error) {
         console.log(error);
-        return res.staus(500).json({
+        return res.status(500).json({
             success:false,
             message:"error in get one job details",
             error:error.message

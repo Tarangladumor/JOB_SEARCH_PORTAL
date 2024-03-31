@@ -12,7 +12,7 @@ const { auth, isEmployer, isAdmin } = require('../middlewares/Auth');
 
 router.post("/createjob",auth,isEmployer,createJob);
 router.get("/getAllJobs",getAllJobs);
-router.get("/getJobDetails",getOneJobDetails);
+router.get("/getJobDetails/:jobId",getOneJobDetails);
 
 router.post("/editJob",auth,isEmployer,editJob);
 router.post("/deleteJob",auth,isEmployer,deleteJob);
