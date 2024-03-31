@@ -22,6 +22,7 @@ const PORT = process.env.PORT || 8001
 database.connect();
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 app.use(cookieParser());
 
 app.use(

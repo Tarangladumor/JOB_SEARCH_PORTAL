@@ -4,11 +4,11 @@ const categorySchema = new mongoose.Schema({
     name : {
         type:String,
         required:true,
-        trim:true
+        trim:true,
     },
     description:{
         type:String,
-        trim:true
+        trim:true,
     },
     Jobs:[
         {
