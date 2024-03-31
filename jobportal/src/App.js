@@ -7,6 +7,9 @@ import Signup from './pages/Signup';
 import VerifyEmail from './pages/VerifyEmail';
 import Jobs from './pages/Jobs';
 import JOB from './pages/JOB';
+import Dashboard from './pages/Dashboard';
+import MyProfile from './components/Dashboard/MyProfile';
+import CreateJob from './pages/CreateJob';
 
 function App() {
   return (
@@ -25,6 +28,12 @@ function App() {
         <Route path='/jobs' element={<Jobs/>}/>
 
         <Route path='/jobs/:jobId' element={<JOB/>}/>
+
+        <Route element={<Dashboard/>}/>
+
+        <Route path='dashboard/my-profile' element={<MyProfile/>}/>
+
+        <Route path="/create-job" element={<CreateJob/>}/>
 
       </Routes>
     </div>

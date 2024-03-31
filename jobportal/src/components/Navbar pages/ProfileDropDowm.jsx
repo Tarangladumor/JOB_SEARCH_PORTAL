@@ -29,7 +29,7 @@ const ProfileDropDowm = () => {
           open && (
             <div onClick={(e) => e.stopPropagation()} className='border-2 border-[#004E89] rounded-xl mt-2 absolute flex flex-col'>
 
-              <Link to='/dashboard/myprofile' onClick={() => setOpen(false)} className='flex justify-center items-center border-b-2 border-[#004E89] py-1'>
+              <Link to='/dashboard/my-profile' onClick={() => setOpen(false)} className='flex justify-center items-center border-b-2 border-[#004E89] py-1'>
                 <VscDashboard className='text-lg ' />
                 Dashboard
               </Link>

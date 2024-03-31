@@ -13,13 +13,14 @@ exports.createJob = async(req,res) => {
             category,
             tag,
             location,
+            Salary
         } = req.body
 
         if(!jobType || jobType === "Part-Time"){
             jobType = "Full-Time"
         }
 
-        if(!jobTitle || !jobDescription  || !category || !location){
+        if(!jobTitle || !jobDescription  || !category || !location || !Salary){
             return res.status(400).json({
                 success:false,
                 message:"All feilds are required in creating the job"
@@ -63,6 +64,7 @@ exports.createJob = async(req,res) => {
             category:categoryDetails._id,
             tag,
             location,
+            Salary
         })
 
         await User.findByIdAndUpdate({_id : employerDetails._id},{

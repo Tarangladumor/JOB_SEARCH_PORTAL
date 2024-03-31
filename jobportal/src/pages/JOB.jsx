@@ -44,7 +44,7 @@ const JOB = () => {
                         <p className='font-jura font-normal text-2xl'>{job.location}</p>
                     </div>
 
-                    <hr className=' bg-[#7FAFD3] my-2' />
+                    <hr className=' border-[#7FAFD3] border-2 my-2' />
                     <div className=' flex justify-end items-center gap-5'>
                         <p className='font-jura'>Applicants : <span className='font-bold'>{job.jobApplications.length}</span></p>
                         <button className='border-2 border-[#004E89] py-1 px-3 rounded-2xl bg-[#7FAFD3] font-jura font-medium'>Apply Now</button>
