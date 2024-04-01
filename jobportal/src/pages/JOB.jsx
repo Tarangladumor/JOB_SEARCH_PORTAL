@@ -2,12 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { getOneJobDetails } from '../services/operations/jobsAPI';
 import { IoLocationSharp } from "react-icons/io5";
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { applyJob } from '../services/operations/jobsAPI';
+import { setApply } from '../slices/jobSlice';
+import toast from 'react-hot-toast';
 
 const JOB = () => {
 
     const { jobId } = useParams();
-    console.log(jobId);
+    const {token} = useSelector((state) => state.auth);
+    // const {user} = useSelector((state) => state.profile);
 
+    // console.log(userId);
+    // console.log(jobId);
+
+    const dispatch = useDispatch()
+
+    const {apply} = useSelector((state) => state.job); 
+    const [loading, setLoading] = useState(false);
     const [job, setJob] = useState(null);
 
     useEffect(() => {
@@ -31,6 +43,14 @@ const JOB = () => {
         return <div>Loading....</div>
     }
 
+    const jobApply = async() => {
+        setLoading(true);
+        const result = await applyJob(jobId,token);
+        if(result) {
+            dispatch(setApply(result))
+        }
+    }
+
     return (
         <div>
 
@@ -47,7 +67,8 @@ const JOB = () => {
                     <hr className=' border-[#7FAFD3] border-2 my-2' />
                     <div className=' flex justify-end items-center gap-5'>
                         <p className='font-jura'>Applicants : <span className='font-bold'>{job.jobApplications.length}</span></p>
-                        <button className='border-2 border-[#004E89] py-1 px-3 rounded-2xl bg-[#7FAFD3] font-jura font-medium'>Apply Now</button>
+                        <button className='border-2 border-[#004E89] py-1 px-3 rounded-2xl bg-[#7FAFD3] font-jura font-medium'
+                        onClick={jobApply}>Apply Now</button>
                     </div>
                 </div>
 

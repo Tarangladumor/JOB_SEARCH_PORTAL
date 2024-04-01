@@ -5,18 +5,19 @@ const mailSender = require("../utils/mailSender");
 exports.applyJob = async(req,res) => {
     try {
 
-        const {job_id} = req.body;
-        console.log(job_id);
+        const {jobId} = req.body;
+        console.log(req.body);
+        console.log("User......",req.user.id);
         const userId = req.user.id;
 
-        if(!job_id) { 
+        if(!jobId) { 
             return res.status(400).json({
                 success:false,
                 message:"Job id not found"
             })
         }
 
-        const job = await Job.findById(job_id);
+        const job = await Job.findById(jobId);
 
         if(!job) {
             return res.status(400).json({
@@ -33,7 +34,7 @@ exports.applyJob = async(req,res) => {
             });
         }
 
-        const appliedJob = await Job.findOneAndUpdate({_id:job_id},
+        const appliedJob = await Job.findByIdAndUpdate(jobId,
             {
                 $push:{
                     jobApplications:userId
@@ -52,7 +53,7 @@ exports.applyJob = async(req,res) => {
 
             const endrolledJobseekers = await User.findOneAndUpdate({_id:userId},{
                 $push:{
-                    jobs:job_id
+                    jobs:jobId
                 }
             },{new:true});
 

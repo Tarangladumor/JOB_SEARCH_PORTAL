@@ -3,7 +3,7 @@ import { apiConnector } from "../apiConnector";
 import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
-const { jobendpoints, categoryendpoints } = require("../apis");
+const { jobendpoints, categoryendpoints, applyendpoints, employerendpoints } = require("../apis");
 
 const {
     GETALLJOBS_API,
@@ -14,6 +14,14 @@ const {
 const {
     SHOWALLCATEGORIES_API
 } = categoryendpoints
+
+const {
+    APPLYJOB_API
+} = applyendpoints
+
+const {
+    GETJOB_POSTS_API
+} = employerendpoints
 
 export const getAllJobs = async () => {
     const toastId = toast.loading("Loading...");
@@ -165,5 +173,49 @@ export const addJob = async(data,token) => {
         toast.error(error.message);
     }
     toast.dismiss(toastId);
+    return result
+}
+
+export const applyJob = async(jobId,token) => {
+    let result = []
+    const toastId = toast.loading("Loading...")
+    try {
+        const res = await apiConnector("POST", APPLYJOB_API, {
+            authorization:`Bearer ${token}`,
+            jobId
+        })
+
+        console.log("APPLYJOB_API RESPONSE.....",res);
+
+        toast.success("Job Apply Successfully")
+        result = res?.data?.data
+    } catch (error) {
+        console.log("APPLYJOB_API ERROR.....",error);
+        // toast.error(error.message)
+    }
+    toast.dismiss(toastId);
+    return result
+}
+
+export const getJobPost = async(token) => {
+    let result = []
+    console.log(token);
+    try{
+        // const res = await apiConnector("GET", GETJOB_POSTS_API, {
+        //     authorization : `Bearer ${token}`
+        // });
+
+        const res = await axios.get(`${BASE_URL}/employer/getjobposts`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        console.log("GETJOB_POSTS_API RESPONSE.....",res)
+
+        result = res?.data?.data
+    } catch (error) {
+        console.log("GETJOB_POSTS_API ERROR.....",error)
+    }
     return result
 }
