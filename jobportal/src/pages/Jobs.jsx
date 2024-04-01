@@ -55,7 +55,7 @@ const Jobs = () => {
                                         <MdOutlineDescription />
                                         {job?.jobDescription}
                                     </p>
-                                    <p className='font-jura font-normal text-xl'><spna className='font-jura font-bold text-xl'>Type : </spna>{job?.jobType}</p>
+                                    <p className='font-jura font-normal text-xl'><span className='font-jura font-bold text-xl'>Type : </span>{job?.jobType}</p>
 
                                     <div className='flex justify-end '>
                                         <Link to={`/jobs/${job._id}`}>

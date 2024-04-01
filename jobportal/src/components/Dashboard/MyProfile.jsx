@@ -7,6 +7,7 @@ import { FaRegCalendarMinus } from "react-icons/fa";
 import { MdOutlineSettingsPhone } from "react-icons/md";
 import { FaBookReader } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import JobPost from './JobPost';
 
 const MyProfile = () => {
 
@@ -89,7 +90,7 @@ const MyProfile = () => {
 
                     :
 
-                    (<div className='lg:w-10/12 mx-auto mt-10 flex flex-col gap-5'>
+                    (<><div className='lg:w-10/12 mx-auto mt-10 flex flex-col gap-5'>
                         <div className='flex gap-10 border-2 border-[#7FAFD3] rounded-3xl px-10 py-10 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.2)]'>
                             <div>
                                 <img src={user?.image} alt={`profile-${user?.firstName}`}
@@ -159,7 +160,10 @@ const MyProfile = () => {
                             </div>
 
                         </div>
-                    </div>)
+                    </div>
+                    <JobPost /></>
+                    
+                    )
             }
         </div>
     )
