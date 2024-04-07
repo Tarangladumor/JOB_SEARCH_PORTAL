@@ -53,7 +53,7 @@ const Jobs = () => {
                                     </p>
                                     <p className='font-jura font-normal text-xl flex gap-1 items-center'>
                                         <MdOutlineDescription />
-                                        {job?.jobDescription}
+                                        {job?.jobDescription.split(" ").slice(0,20).join(" ")}.....
                                     </p>
                                     <p className='font-jura font-normal text-xl'><span className='font-jura font-bold text-xl'>Type : </span>{job?.jobType}</p>
 

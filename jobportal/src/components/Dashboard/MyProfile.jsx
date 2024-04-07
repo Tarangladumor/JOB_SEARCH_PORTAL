@@ -6,12 +6,13 @@ import { MdEmail } from "react-icons/md";
 import { FaRegCalendarMinus } from "react-icons/fa";
 import { MdOutlineSettingsPhone } from "react-icons/md";
 import { FaBookReader } from "react-icons/fa";
-import { Link } from 'react-router-dom';
-import JobPost from './JobPost';
+import { Link, useNavigate } from 'react-router-dom';
 
 const MyProfile = () => {
 
     const { user } = useSelector((state) => state.profile);
+
+    const navigate = useNavigate();
 
     // if (authLoading || profileLoading) {
     //     return (
@@ -34,7 +35,7 @@ const MyProfile = () => {
                             <div className='flex flex-col gap-5 w-[65%] ml-10'>
                                 <div className='flex items-center gap-3'>
                                     <h1 className=' font-jura font-bold text-4xl'>{user?.firstName} {user?.lastName}</h1>
-                                    <button>
+                                    <button onClick={() => navigate('/dashboard/edit-profile')}>
                                         <CiEdit size={30} />
                                     </button>
                                 </div>
@@ -53,10 +54,12 @@ const MyProfile = () => {
                                             <p className='font-jura font-normal text-2xl'>{user?.jobSeeker?.contactNumber}</p>
                                         </div>)
                                         :
-                                        (<div className='flex items-center gap-5'>
-                                            <MdOutlineSettingsPhone size={24} />
-                                            <p className='font-jura font-normal text-2xl'>Add Contact Number</p>
-                                        </div>)}
+                                        (<button onClick={() => navigate('/dashboard/edit-profile')}>
+                                            <div className='flex items-center gap-5'>
+                                                <MdOutlineSettingsPhone size={24} />
+                                                <p className='font-jura font-normal text-2xl'>Add Contact Number</p>
+                                            </div>
+                                        </button>)}
                                 </div>
 
                                 <div className='flex justify-between'>
@@ -72,10 +75,12 @@ const MyProfile = () => {
                                         </div>
                                     )
                                         :
-                                        (<div className='flex items-center gap-5'>
-                                            <FaBookReader size={24} />
-                                            <p className='font-jura font-normal text-2xl'>Add your Degree</p>
-                                        </div>)}
+                                        (<button onClick={() => navigate('/dashboard/edit-profile')}>
+                                            <div className='flex items-center gap-5'>
+                                                <FaBookReader size={24} />
+                                                <p className='font-jura font-normal text-2xl'>Add your Degree</p>
+                                            </div>
+                                        </button>)}
                                 </div>
 
                                 <div className='flex items-center gap-5'>
@@ -90,7 +95,7 @@ const MyProfile = () => {
 
                     :
 
-                    (<><div className='lg:w-10/12 mx-auto mt-10 flex flex-col gap-5'>
+                    (<div className='lg:w-10/12 mx-auto mt-10 flex flex-col gap-5'>
                         <div className='flex gap-10 border-2 border-[#7FAFD3] rounded-3xl px-10 py-10 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.2)]'>
                             <div>
                                 <img src={user?.image} alt={`profile-${user?.firstName}`}
@@ -100,7 +105,7 @@ const MyProfile = () => {
                             <div className='flex flex-col gap-5 w-[65%] ml-10'>
                                 <div className='flex items-center gap-3'>
                                     <h1 className=' font-jura font-bold text-4xl'>{user?.firstName} {user?.lastName}</h1>
-                                    <button>
+                                    <button onClick={() => navigate('/dashboard/edit-profile')}>
                                         <CiEdit size={30} />
                                     </button>
                                 </div>
@@ -113,40 +118,44 @@ const MyProfile = () => {
                                         <p className='font-jura font-normal text-2xl'>{user?.email}</p>
                                     </div>
 
-                                    {user?.jobSeeker?.contactNumber ? (
+                                    {user?.employer?.contactNumber ? (
                                         <div className='flex items-center gap-5'>
                                             <MdOutlineSettingsPhone size={24} />
-                                            <p className='font-jura font-normal text-2xl'>{user?.jobSeeker?.contactNumber}</p>
+                                            <p className='font-jura font-normal text-2xl'>{user?.employer?.contactNumber}</p>
                                         </div>)
                                         :
-                                        (<div className='flex items-center gap-5'>
-                                            <MdOutlineSettingsPhone size={24} />
-                                            <p className='font-jura font-normal text-2xl'>Add Contact Number</p>
-                                        </div>)}
+                                        (<button onClick={() => navigate('/dashboard/edit-profile')}>
+                                            <div className='flex items-center gap-5'>
+                                                <MdOutlineSettingsPhone size={24} />
+                                                <p className='font-jura font-normal text-2xl'>Add Contact Number</p>
+                                            </div>
+                                        </button>)}
                                 </div>
 
                                 <div className='flex justify-between'>
                                     <div className='flex items-center gap-5'>
                                         <FaRegCalendarMinus size={24} />
-                                        <p className='font-jura font-normal text-2xl'>{user?.jobSeeker?.experiance} Years</p>
+                                        <p className='font-jura font-normal text-2xl'>{user?.employer?.experiance} Years</p>
                                     </div>
 
                                     {user?.jobSeeker?.degree ? (
                                         <div className='flex items-center gap-5'>
                                             <FaBookReader size={24} />
-                                            <p className='font-jura font-normal text-2xl'>{user?.jobSeeker?.degree}</p>
+                                            <p className='font-jura font-normal text-2xl'>{user?.employer?.degree}</p>
                                         </div>
                                     )
                                         :
-                                        (<div className='flex items-center gap-5'>
-                                            <FaBookReader size={24} />
-                                            <p className='font-jura font-normal text-2xl'>Add your Degree</p>
-                                        </div>)}
+                                        (<button onClick={() => navigate('/dashboard/edit-profile')}>
+                                            <div className='flex items-center gap-5'>
+                                                <FaBookReader size={24} />
+                                                <p className='font-jura font-normal text-2xl'>Add your Degree</p>
+                                            </div>
+                                        </button>)}
                                 </div>
 
                                 <div className='flex items-center gap-5'>
                                     <IoLocationSharp size={24} />
-                                    <p className='font-jura font-normal text-2xl'>{user?.jobSeeker?.location}</p>
+                                    <p className='font-jura font-normal text-2xl'>{user?.employer?.location}</p>
                                 </div>
 
                                 {/* <hr className='border-[#7FAFD3] border-2 my-2'/> */}
@@ -161,8 +170,8 @@ const MyProfile = () => {
 
                         </div>
                     </div>
-                    <JobPost /></>
-                    
+
+
                     )
             }
         </div>

@@ -155,6 +155,8 @@ exports.editJob = async(req,res) => {
     try{
         const {jobId} = req.body;
         const updates = req.body;
+
+        console.log("req.body : ",req.body);
         
         const job = await Job.findById(jobId)
 
@@ -206,6 +208,74 @@ exports.deleteJob = async(req,res) => {
         return res.status(500).json({
             success:false,
             message:"JOb not Deleted"
+        })
+    }
+}
+
+exports.getJobApplicants = async(req,res) => {
+    try {
+
+        console.log(req);
+        const {jobid} = req.body
+
+        if(!jobid){
+            return res.status(400).json({
+                success:false,
+                message:"Job id not found"
+            })
+        }
+        
+        const applicants = await Job.findById(jobid).populate("jobApplications");
+
+        console.log(applicants)
+
+        return res.status(200).json({
+            success:true,
+            message:"Job application fetched successfully",
+            data : applicants,
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"Error in get job Applicants"
+        })
+    }
+}
+
+exports.getFullJobDetails = async(req,res) => {
+    try {
+        const { jobId } = req.body
+
+        const jobDetails = await Job.findOne({
+            _id: jobId
+        }).populate({
+            path : "employer",
+            populate : {
+                path : "employer"
+            },
+        })
+        .populate("category")
+        .populate("jobType").exec()
+
+        if(!jobDetails){
+            return res.status(400).json({
+                success:false,
+                message: `Could not find job with id : ${jobId}`
+            })
+        }
+
+        return res.status(200).json({
+            success:true,
+            data : {
+                jobDetails
+            }
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            messgae:error.message
         })
     }
 }

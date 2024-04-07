@@ -1,5 +1,6 @@
 const JobSeeker = require("../models/JobSeeker");
 const User = require("../models/user");
+const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
 exports.updateJobSeeker = async(req,res) => {
     try {
@@ -9,7 +10,7 @@ exports.updateJobSeeker = async(req,res) => {
             dateOfBirth,
             about,
             contactNumber = "",
-            currentSalayey = "",
+            currentSalary = "",
             degree = "",
             experiance = ""
         } = req.body;
@@ -17,12 +18,12 @@ exports.updateJobSeeker = async(req,res) => {
         const userId = req.user.id;
         console.log(userId)
 
-        if(!contactNumber || !currentSalayey || !degree || !experiance) {
-            return res.status(400).json({
-                success:false,
-                messgae:"all feilds are required in updatejobseeker"
-            });
-        }
+        // if(!contactNumber || !currentSalary || !degree || !experiance) {
+        //     return res.status(400).json({
+        //         success:false,
+        //         messgae:"all feilds are required in updatejobseeker"
+        //     });
+        // }
 
         const userDetails = await User.findById(userId);
 
@@ -40,7 +41,7 @@ exports.updateJobSeeker = async(req,res) => {
         jobSeekerDetails.dateOfBirth = dateOfBirth;
         jobSeekerDetails.about = about;
         jobSeekerDetails.contactNumber = contactNumber;
-        jobSeekerDetails.currentSalary = currentSalayey;
+        jobSeekerDetails.currentSalary = currentSalary;
         jobSeekerDetails.degree = degree;
         jobSeekerDetails.experiance = experiance;
 
@@ -143,6 +144,39 @@ exports.getAplliedJobs = async(req,res) => {
             success:false,
             mesage:"error in getting applied jobs",
             error:error.mesage,
+        })
+    }
+}
+
+exports.updateDisplayPicture =async (req,res) => {
+    try {
+        const displayPicture = req.files.displayPicture;
+        const userId = req.user.id
+
+        const image = await uploadImageToCloudinary(
+            displayPicture,
+            process.env.FOLDER_NAME,
+            1000,
+            1000
+        )
+
+        console.log(image)
+
+        const updatedProfile = await User.findByIdAndUpdate(
+            {_id: userId},
+            {image : image.secure_url},
+            {new:true}        
+        )
+
+        res.send({
+            success:true,
+            message: "Image Updated successfully",
+            data: updatedProfile
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            messgae:error.message,
         })
     }
 }
