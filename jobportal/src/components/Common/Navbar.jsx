@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LOGO from '../../assets/LOGO.png';
 import ProfileDropDowm from '../Navbar pages/ProfileDropDowm';
+import { ACCOUNT_TYPE } from '../../utils/constants'
 
 const Navbar = () => {
 
@@ -22,9 +23,19 @@ const Navbar = () => {
                     Home
                 </Link>
 
-                <Link to='/jobs'>
-                    Jobs
-                </Link>
+                {
+
+                    user?.AccountType === ACCOUNT_TYPE.JOBSEEKER ? (
+                        <Link to='/jobs'>
+                            Jobs
+                        </Link>
+                    ) : (
+                        <Link to='/myjobs'>
+                            My Jobs
+                        </Link>
+                    )
+
+                }
 
                 <Link to='/compines'>
                     Companies

@@ -1,3 +1,4 @@
+const { trusted } = require("mongoose");
 const Employer = require("../models/Employer");
 const User = require("../models/user");
 
@@ -42,7 +43,7 @@ exports.updateEmployer = async(req,res) => {
         const updatedEmployer = await User.findById(id).populate("employer").exec();
 
         return res.status(200).json({
-            success:false,
+            success:true,
             messagge:"Employyer updated successfully",
             data:updatedEmployer
         })
@@ -113,7 +114,12 @@ exports.postJobs = async(req,res) => {
 
         const id = req.user.id;
 
-        const userDetails = await User.findById({_id:id}).populate("jobs").exec();
+        const userDetails = await User.findById({_id:id}).populate({
+            path: "jobs",
+            populate: {
+                path : "jobApplications"
+            }
+        }).exec();
 
         if(!userDetails) {
             return res.status(400).json({
@@ -129,7 +135,7 @@ exports.postJobs = async(req,res) => {
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            success:true,
+            success:false,
             message:"error in geting the data of job posts"
         })
     }

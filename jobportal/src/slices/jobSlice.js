@@ -11,13 +11,13 @@ const jobSlice = createSlice({
     initialState: initialState,
     reducers : {
         setJob(state, value){
-            state.token = value.payload;
+            state.job = value.payload;
         },
         setEditJob(state, value){
-            state.signupData = value.payload;
+            state.editJob = value.payload;
         },
         setApply(state, value){
-            state.loading = value.payload;
+            state.apply = value.payload;
         }
     }
 }) ;

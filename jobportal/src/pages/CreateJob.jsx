@@ -7,7 +7,7 @@ import { addJob } from '../services/operations/jobsAPI'
 import toast from 'react-hot-toast'
 import { setJob } from '../slices/jobSlice'
 
-const CreateJob = () => {
+const CreateJob = ({text}) => {
   const {
     register,
     handleSubmit,
@@ -88,13 +88,13 @@ const CreateJob = () => {
           formData.append("jobType", data.jobType)
         }
 
-        if (currentValues.category._id !== job.category._id) {
+        if (currentValues.category !== job.category) {
           formData.append("category", data.category)
         }
 
         setLoading(true);
-
-        const result = await editJobDetails(data, token);
+        console.log(data);
+        const result = await editJobDetails(formData, token);
         setLoading(false);
         if (result) {
           dispatch(setJob(result))
@@ -121,20 +121,20 @@ const CreateJob = () => {
     setLoading(false);
   }
   return (
-    <div>
+    <div className='h-[100vh] mb-20'>
 
       <div className='bg-[#7BBFF3] h-[500px] w-[500px] mt-10 ml-10 relative'>
-        <div className='z-1000 backdrop-blur-lg absolute border-2 border-[#13317E] rounded-xl top-14 left-16 w-[calc(100vw-15rem)]'>
-          <p className='font-jura font-bold text-5xl text-center p-5'>Job Create</p>
+        <div className='z-1000 backdrop-blur-3xl absolute border-2 border-[#13317E] rounded-xl top-14 left-16 w-[calc(100vw-15rem)]'>
+          <p className='font-jura font-bold text-5xl text-center p-5'>{text}</p>
 
-          <div>
+          <div className='mt-10'>
             <form onSubmit={handleSubmit(onSubmit)}>
 
-              <div className='flex gap-10'>
-                <div className='flex flex-col gap-10'>
+              <div className='flex gap-10 w-fit mx-auto'>
+                <div className='flex flex-col gap-10  pb-14'>
                   <div>
-                    <label>
-                      <p>
+                    <label className='flex flex-col gap-3'>
+                      <p className=' font-jura text-3xl font-bold'>
                         Job Title<sup className='text-red-400'>*</sup>
                       </p>
                       <input
@@ -142,36 +142,39 @@ const CreateJob = () => {
                         name='jobTitle'
                         id='jobTitle'
                         placeholder='Enter Job Title'
-                        {...register("jobTitle", { required: true })} />
+                        {...register("jobTitle", { required: true })}
+                        className=' bg-[#F3F3F3] w-[500px] px-5 py-3 ml-5 border-[1px] border-black rounded-lg  placeholder:font-jura placeholder:font-bold' />
                     </label>{
                       errors.jobTitle && (
-                        <span>Job Title Required</span>
+                        <span className='ml-5'>Job Title Required</span>
                       )
                     }
                   </div>
 
 
                   <div>
-                    <label>
-                      <p>
+                    <label className='flex flex-col gap-3'>
+                      <p className=' font-jura text-3xl font-bold'>
                         Job Description<sup className='text-red-400'>*</sup>
                       </p>
-                      <input
+                      <textarea
                         type='text'
                         name='jobDescription'
                         id='jobDescription'
                         placeholder='Enter Job Description'
-                        {...register("jobDescription", { required: true })} />
+                        rows={7}
+                        {...register("jobDescription", { required: true })}
+                        className=' bg-[#F3F3F3] w-[500px] px-5 py-3 ml-5 border-[1px] border-black rounded-lg  placeholder:font-jura placeholder:font-bold' />
                     </label>{
                       errors.jobDescription && (
-                        <span>Job Description Required</span>
+                        <span className='ml-5'>Job Description Required</span>
                       )
                     }
                   </div>
 
                   <div>
-                    <label>
-                      <p>
+                    <label className='flex flex-col gap-3'>
+                      <p className=' font-jura text-3xl font-bold'>
                         Salary<sup className='text-red-400'>*</sup>
                       </p>
                       <input
@@ -179,20 +182,20 @@ const CreateJob = () => {
                         name='Salary'
                         id='Salary'
                         placeholder='Enter Salary'
-                        {...register("Salary", { required: true })} />
+                        {...register("Salary", { required: true })}
+                        className=' bg-[#F3F3F3] w-[500px] px-5 border-[1px] border-black rounded-lg py-3 ml-5 placeholder:font-jura placeholder:font-bold' />
                     </label>{
                       errors.Salary && (
-                        <span>Salary Required</span>
+                        <span className='ml-5'>Salary Required</span>
                       )
                     }
                   </div>
                 </div>
 
-
-                <div>
+                <div className='flex flex-col gap-10'>
                   <div>
-                    <label>
-                      <p>
+                    <label className='flex flex-col gap-3'>
+                      <p className=' font-jura text-3xl font-bold'>
                         Location<sup className='text-red-400'>*</sup>
                       </p>
                       <input
@@ -200,43 +203,46 @@ const CreateJob = () => {
                         name='location'
                         id='location'
                         placeholder='Enter Job Location'
-                        {...register("location", { required: true })} />
+                        {...register("location", { required: true })}
+                        className=' bg-[#F3F3F3] w-[500px] px-5 py-3 ml-5 border-[1px] border-black rounded-lg  placeholder:font-jura placeholder:font-bold' />
                     </label>{
                       errors.location && (
-                        <span>Job Location Required</span>
+                        <span className='ml-5'>Job Location Required</span>
                       )
                     }
                   </div>
 
                   <div>
-                    <label>
-                      <p>
+                    <label className='flex flex-col gap-3'>
+                      <p className=' font-jura text-3xl font-bold'>
                         Job Type<sup className='text-red-400'>*</sup>
                       </p>
                       <select
                         id='jobType'
                         defaultValue=""
-                        {...register("jobType", { required: true })}>
+                        {...register("jobType", { required: true })}
+                        className=' bg-[#F3F3F3] w-[500px] px-5 py-3 ml-5 border-[1px] border-black rounded-lg  placeholder:font-jura placeholder:font-bold'>
                         <option value="Part-Time">Part-Time</option>
                         <option value="Full-Time">Full-Time</option>
                       </select>
                     </label>{
                       errors.jobType && (
-                        <span>Job Location Required</span>
+                        <span className='ml-5'>Job Location Required</span>
                       )
                     }
                   </div>
 
                   <div>
-                    <label>
-                      <p>
+                    <label className='flex flex-col gap-3'>
+                      <p className=' font-jura text-3xl font-bold'>
                         Category<sup className='text-red-400'>*</sup>
                       </p>
                       <select
                         id='category'
                         defaultValue=""
-                        {...register("category", { required: true })}>
-                        <option value="" disabled>Choose a Category</option>
+                        {...register("category", { required: true })}
+                        className=' bg-[#F3F3F3] w-[500px] px-5 py-3 ml-5 border-[1px] border-black rounded-lg  placeholder:font-jura placeholder:font-bold'>
+                        <option value="" disabled className='font-jura font-bold'>Choose a Category</option>
                         {
                           !loading && jobCategories.map((ct, index) => (
                             <option key={index} value={ct._id}>{ct?.name}</option>
@@ -245,17 +251,22 @@ const CreateJob = () => {
                       </select>
                     </label>{
                       errors.jobType && (
-                        <span>Job Category Required</span>
+                        <span className='ml-5'>Job Category Required</span>
                       )
                     }
                   </div>
+
+
                 </div>
+
+
+
               </div>
 
-
-              <button className='flex justify-end w-[60%] '>
+              <button className='bg-[#7FAFD3] w-fit border-[1px] rounded-xl font-jura text-xl border-[#13317E] float-right mb-5 mr-28 px-10 font-bold py-4 '>
                 Create Job
               </button>
+
 
             </form>
           </div>
