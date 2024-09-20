@@ -52,7 +52,7 @@ const JobPost = () => {
                 <div className=' flex justify-end items-center gap-5'>
                   <p className='font-jura'>Applicants : <span className='font-bold'>{job.jobApplications.length}</span></p>
 
-                  <Link to={`/my-jobs/${job?._id}`}>
+                  <Link to={`/myjobs/${job?._id}`}>
                     <button className='border-2 border-[#004E89] py-1 px-3 rounded-2xl bg-[#7FAFD3] font-jura font-medium'
                     >View Applications</button>
                   </Link>

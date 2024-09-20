@@ -223,28 +223,28 @@ export const getJobPost = async (token) => {
 }
 
 export const getJobApplicants = async (token, jobid) => {
-    let result = null
-    console.log(jobid);
+    let result = null;
     try {
-
         const res = await axios({
             method: 'get',
-            url: BASE_URL + '/job/getJobApplicants',
-            headers: { authorization: `Bearer ${token}` },
-            cookie: {
+            url: `${BASE_URL}/job/getJobApplicants`,
+            headers: { 
+                authorization: `Bearer ${token}` 
+            },
+            params: {
                 jobId: jobid
             }
         });
 
-        console.log("GET_JOB_APPICANTS RESPONSE.....", res)
+        console.log("GET_JOB_APPLICANTS RESPONSE.....", res);
 
-        result = res?.data?.data
+        result = res?.data?.data;
     } catch (error) {
-        console.log("GET_JOB_APPICANTS ERROR...........", error);
+        console.log("GET_JOB_APPLICANTS ERROR...........", error);
     }
 
-    return result
-}
+    return result;
+};
 
 export const getFullJobDetails = async (jobId, token) => {
     const toastId = toast.loading("Loading.....")

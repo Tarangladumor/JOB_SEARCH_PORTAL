@@ -212,36 +212,40 @@ exports.deleteJob = async(req,res) => {
     }
 }
 
-exports.getJobApplicants = async(req,res) => {
+exports.getJobApplicants = async (req, res) => {
     try {
+        // If the jobId is passed via query parameters, access it from req.query
+        const { jobId } = req.query;
 
-        console.log(req);
-        const {jobid} = req.body
-
-        if(!jobid){
+        if (!jobId) {
             return res.status(400).json({
-                success:false,
-                message:"Job id not found"
-            })
+                success: false,
+                message: "Job id not found"
+            });
         }
-        
-        const applicants = await Job.findById(jobid).populate("jobApplications");
 
-        console.log(applicants)
+        const applicants = await Job.findById(jobId).populate("jobApplications");
+
+        if (!applicants) {
+            return res.status(404).json({
+                success: false,
+                message: "No job found with the provided ID"
+            });
+        }
 
         return res.status(200).json({
-            success:true,
-            message:"Job application fetched successfully",
-            data : applicants,
-        })
+            success: true,
+            message: "Job applications fetched successfully",
+            data: applicants
+        });
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            success:false,
-            message:"Error in get job Applicants"
-        })
+            success: false,
+            message: "Error in fetching job applicants"
+        });
     }
-}
+};
 
 exports.getFullJobDetails = async(req,res) => {
     try {
