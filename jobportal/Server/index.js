@@ -25,12 +25,35 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser());
 
-app.use(
+// app.use(
+//     cors({
+//         origin:"http://localhost:3000",
+//         credentials:true,
+//     })
+// )
+
+// List of allowed origins for CORS
+const allowedOrigins = [
+    "https://job-search-portal-tarangladumors-projects.vercel.app",
+    "https://job-search-portal-git-main-tarangladumors-projects.vercel.app",
+    "https://job-search-portal-rho.vercel.app",
+    "http://localhost:3000"
+  ];
+  
+  // CORS configuration to handle multiple origins
+  app.use(
     cors({
-        origin:"http://localhost:3000",
-        credentials:true,
+      origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+          callback(null, true);
+        } else {
+          callback(new Error("Not allowed by CORS"));
+        }
+      },
+      credentials: true,
+      allowedHeaders: ["Content-Type", "Authorization", "headers"],
     })
-)
+  );
 
 app.use(
     fileUpload({
