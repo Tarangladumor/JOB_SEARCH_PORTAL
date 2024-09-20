@@ -5,7 +5,7 @@ const Employer = require("../models/Employer");
 const JobSeeker = require("../models/JobSeeker");
 require("dotenv").config();
 const OTP = require("../models/Otp");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 
 
