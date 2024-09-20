@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require("../models/User");
 const otpGenerator = require("otp-generator");
 const Otp = require("../models/Otp");
 const Employer = require("../models/Employer");
