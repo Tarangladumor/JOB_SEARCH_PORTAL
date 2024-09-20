@@ -1,5 +1,5 @@
 const Job = require("../models/Job");
-const User = require('../models/user');
+const User = require('../models/User');
 const mailSender = require("../utils/mailSender");
 
 exports.applyJob = async(req,res) => {

@@ -1,6 +1,6 @@
 const { trusted } = require("mongoose");
 const Employer = require("../models/Employer");
-const User = require("../models/user");
+const User = require("../models/User");
 
 exports.updateEmployer = async(req,res) => {
     try {

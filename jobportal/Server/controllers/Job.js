@@ -1,7 +1,7 @@
 const Employer = require("../models/Employer");
 const Category = require("../models/Category");
 const Job = require("../models/Job")
-const User = require("../models/user");
+const User = require("../models/User");
 
 exports.createJob = async(req,res) => {
     try {

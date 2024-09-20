@@ -1,5 +1,5 @@
 const JobSeeker = require("../models/JobSeeker");
-const User = require("../models/user");
+const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
 exports.updateJobSeeker = async(req,res) => {
